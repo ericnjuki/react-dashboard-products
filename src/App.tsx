@@ -14,6 +14,7 @@ function App() {
         sm:grid-cols-[minmax(50px,1fr)_1fr_minmax(50px,1fr)]
         md:grid-cols-[minmax(150px,1fr)_3fr_minmax(150px,1fr)]
         border-x-4
+        mt-14
         `}>
           <div className="absolute sm:relative translate-x-[-100%] md:translate-x-0 h-[100svh] border-r-4">
             <SideBarNavComponent />
