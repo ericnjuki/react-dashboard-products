@@ -1,33 +1,32 @@
-import { bindActionCreators, Dispatch } from "redux";
-import { connect } from 'react-redux';
-import { getVal } from "./redux-actions/AppActions";
-import { useEffect } from "react";
 
-function App(props: any) {
-  const { val, getValAction } = props;
+import HeaderComponent from "./components/Header";
+import SideBarNavComponent from "./components/SideBarNav";
+import MainComponent from "./components/Main";
+import SideBarDetailsComponent from "./components/SideBarDetails";
 
-  useEffect(() => {
-    getValAction();
-  }, []);
-
+function App() {
   return (
-    <>
-      <p>{val}</p>
-    </>
+    <div className="max-w-[1280px] h-[100svh] m-auto">
+        <HeaderComponent />
+        <div className={`
+        grid
+        grid-cols-[0px_2fr]
+        sm:grid-cols-[minmax(50px,1fr)_1fr_minmax(50px,1fr)]
+        md:grid-cols-[minmax(150px,1fr)_3fr_minmax(150px,1fr)]
+        border-x-4
+        `}>
+          <div className="absolute sm:relative translate-x-[-100%] md:translate-x-0 h-[100svh] border-r-4">
+            <SideBarNavComponent />
+          </div>
+          <div className="h-[100svh] sm:border-r-4">
+            <MainComponent />
+          </div>
+          <div className="h-[100svh] hidden sm:block">
+            <SideBarDetailsComponent />
+          </div>
+        </div>
+    </div>
   );
 }
 
-const mapStateToProps = (state: any) => {
-  const { app: { val } } = state;
-  return {
-      val
-  };
-};
-
-
-const mapDispatchToProps = (dispatch: Dispatch) => (
-  bindActionCreators({
-      getValAction: getVal,
-  }, dispatch)
-);
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
