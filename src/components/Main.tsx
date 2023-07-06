@@ -43,6 +43,8 @@ const MainComponent = ({ val, getValAction }: { val: any, getValAction: any, [ke
       flex
       justify-between
       border-b-4
+      md:sticky
+      md:top-[56px]
       `}>
         <span className="p-4 text-xl font-bold">Product Title</span>
         <span className="border-l-4 p-4">Type</span>
