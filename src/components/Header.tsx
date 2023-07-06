@@ -8,13 +8,15 @@ const HeaderComponent = ({ }: any) => {
   return (
     <nav className={`
     h-14
+    w-full
     grid
+    fixed
+    top-0
     grid-cols-[minmax(50px,1fr)_2fr_minmax(50px,1fr)]
     sm:grid-cols-[minmax(50px,0.51fr)_1.5fr_minmax(50px,1fr)]
     md:grid-cols-[minmax(150px,1fr)_3fr_minmax(150px,1fr)]
     border-4
-    fixed
-    top-0
+    bg-[--primary-color]
     `}>
       <div className="border-r-4 flex">
         <div className="md:translate-x-[-100%] w-14 border-r-4">EE</div>
