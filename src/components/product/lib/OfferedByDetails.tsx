@@ -1,47 +1,52 @@
 import { IconContext } from "react-icons";
 import { BiLocationPlus } from "react-icons/bi";
 
-const SideBarDetailsComponent = () => {
+const OfferedByDetails = () => {
   return (
-    <div className="flex flex-col sticky top-[56px]">
+    <div className="flex flex-col">
     {/* TODO: component, will also put it in 'main' in mobile view */}
-      {/* title */}
       {/* TODO: the border+padding can be an @style */}
+      {/* title */}
       <div className={`
-      border-b-4
+      md:border-b-4
       p-4
+      h-14
+      flex
+      items-center
       `}>
-        <span className="text-xl font-bold">Offered By</span>
+        <span className="md:text-xl font-bold">Offered By</span>
       </div>
 
-      {/* company logo */}
-      <div className={`
-      border-b-4
-      p-4
-      `}>
-        <img src="innoloft_logo.png"/>
-      </div>
-
-      {/* user card */}
-      <div className={`
-      border-b-4
-      p-4
-      h-28
-      grid
-      grid-cols-[1fr_2fr]
-      `}>
+      {/* company/user info */}
+      <div className="grid grid-cols-2 md:grid-cols-1 items-center">
+        {/* company logo */}
         <div className={`
-        bg-cover
-        bg-[url('user_8d48197d.png')]
-        `}></div>
-        <div className="flex flex-col self-center pl-4">
-          <span className="font-bold text-sm">Justin Boreman</span>
-          <span className="self-start opacity-50 text-xs">Innoloft Soft Croft</span>
+        p-4
+        `}>
+          <img src="innoloft_logo.png"/>
+        </div>
+
+        {/* user card */}
+        <div className={`
+        p-4
+        h-28
+        grid
+        grid-cols-[1fr_2fr]
+        md:border-b-4
+        `}>
+          <div className={`
+          bg-cover
+          bg-[url('user_8d48197d.png')]
+          `}></div>
+          <div className="flex flex-col self-center pl-4">
+            <span className="font-bold text-sm">Justin Boreman</span>
+            <span className="self-start opacity-50 text-xs">Innoloft Soft Croft</span>
+          </div>
         </div>
       </div>
+
       {/* map location with icon */}
       <div className={`
-      border-b-4
       p-4
       `}>
         <div className="flex">
@@ -77,4 +82,4 @@ const SideBarDetailsComponent = () => {
   );
 }
 
-export default SideBarDetailsComponent;
+export default OfferedByDetails;
