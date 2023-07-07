@@ -1,6 +1,6 @@
 const LogoComponent = () => {
   return (
-    <img src="vite.svg" />
+    <img src="/vite.svg" />
   );
 }
 

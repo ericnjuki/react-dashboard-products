@@ -23,7 +23,7 @@ const OfferedByDetails = () => {
         <div className={`
         p-4
         `}>
-          <img src="innoloft_logo.png"/>
+          <img src="/innoloft_logo.png"/>
         </div>
 
         {/* user card */}
@@ -36,7 +36,7 @@ const OfferedByDetails = () => {
         `}>
           <div className={`
           bg-cover
-          bg-[url('user_8d48197d.png')]
+          bg-[url('/user_8d48197d.png')]
           `}></div>
           <div className="flex flex-col self-center pl-4">
             <span className="font-bold text-sm">Justin Boreman</span>

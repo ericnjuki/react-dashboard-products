@@ -1,6 +1,8 @@
 import { BiBriefcaseAlt2, BiChip, BiMoney, BiTimer } from "react-icons/bi"
 import ProductDetailComponent from "./lib/ProductDetail"
 import OfferedByDetails from "./lib/OfferedByDetails"
+import ButtonComponent from "../common/Button"
+import { Link } from "react-router-dom"
 
 
 const a = ["tag1", "tag1", "tag1", "tag1", "tag1", "tag1", "tag1"]
@@ -29,22 +31,26 @@ const ProductViewComponent = () => {
         {/* image */}
         <div className={`
         bg-cover
-        bg-[url('sad_girl_night_drive.gif')]
+        bg-[url('/sad_girl_night_drive.gif')]
         h-96
         border-b-4
         `}></div>
 
         {/* product title */}
         <div className={`
-        flex
-        justify-between
+        grid
+        grid-cols-[1fr_12em_auto]
+        content-center
         border-b-4
-        md:sticky
-        md:top-14
+        sticky
+        top-14
         h-14
-        items-center
+        bg-[--primary-color]
         `}>
           <span className="p-4 text-xl font-bold">Product Title</span>
+          <Link to={"/product/1/edit"} className="p-3 pr-1.5" >
+            <ButtonComponent className="border-4">Edit Product</ButtonComponent>
+          </Link>
           <span className="border-l-4 p-4">Type</span>
         </div>
 
@@ -55,6 +61,7 @@ const ProductViewComponent = () => {
           <p className="p-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur eos impedit laborum. Odit modi repudiandae consequatur qui illum adipisci quidem minima, eos iure! Fuga a aut accusantium consequatur repellat commodi?</p>
         </div>
 
+        {/* TODO: remove map in mobile view */}
         {/* offered by */}
         <div className={`
         md:hidden

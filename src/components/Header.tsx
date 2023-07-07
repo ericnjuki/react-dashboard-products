@@ -17,6 +17,7 @@ const HeaderComponent = ({ }: any) => {
     md:grid-cols-[minmax(150px,1fr)_3fr_minmax(150px,1fr)]
     border-4
     bg-[--primary-color]
+    z-10
     `}>
       <div className="border-r-4 flex">
         <div className="md:translate-x-[-100%] w-14 border-r-4">EE</div>
@@ -34,7 +35,12 @@ const HeaderComponent = ({ }: any) => {
           </IconContext.Provider>
         </ButtonComponent>
         <ButtonComponent className="grid grid-cols-[2fr,1fr]">
-          <img className="justify-self-center" src="vite.svg" />
+          <div className={`
+            bg-contain
+            bg-no-repeat
+            bg-[url('/user_8d48197d.png')]
+            h-full
+          `}></div>
           <div className="justify-self-center">
             <IconContext.Provider value={{ className: "w-2 h-2 [stroke-width:2]" }}>
               <div>
