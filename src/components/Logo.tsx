@@ -1,6 +1,10 @@
+import { Link } from "react-router-dom";
+
 const LogoComponent = () => {
   return (
-    <img src="/vite.svg" />
+    <Link to={'/'}>
+      <img src="/vite.svg" />
+    </Link>
   );
 }
 

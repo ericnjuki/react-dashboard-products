@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const SideBarNavComponent = () => {
   return (
-    <div className="flex flex-col sticky top-[56px]">
       <ul className="">
         <li className="flex p-4 border-b-4 h-14">
             <IconContext.Provider value={{ className: "w-6 h-6" }}>
@@ -27,7 +26,6 @@ const SideBarNavComponent = () => {
             </span>
         </li>
       </ul>
-    </div>
   );
 }
 

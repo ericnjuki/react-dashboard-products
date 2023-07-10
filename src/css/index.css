@@ -11,6 +11,7 @@
   color: rgba(255, 255, 255, 0.87);
   --primary-color: #242424;
   --input-color: #3b3b3b;
+  --secondary-color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
   font-synthesis: none;
@@ -24,4 +25,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+}
+
+.inverted {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }

@@ -1,4 +1,9 @@
-const ButtonComponent = ({ className='', children, onClick }: any) => {
+type ButtonProps = {
+  className: string,
+  onClick?: () => any, 
+  [key:string]: any
+}
+const ButtonComponent = ({ className='', children, onClick }: ButtonProps) => {
   return (
     <button className={`grid justify-center items-center h-full w-full ${className}`} onClick={onClick}>
       {children}

@@ -3,6 +3,7 @@ import ProductDetailComponent from "./lib/ProductDetail"
 import OfferedByDetails from "./lib/OfferedByDetails"
 import ButtonComponent from "../common/Button"
 import { Link } from "react-router-dom"
+import ModalComponent from "../common/Modal"
 
 
 const a = ["tag1", "tag1", "tag1", "tag1", "tag1", "tag1", "tag1"]
@@ -26,6 +27,8 @@ const address = { // URL encode this
 
 const ProductViewComponent = () => {
   return(
+    <>
+    {/* <ModalComponent /> */}
     <div className="grid grid-rows-[min-content] md:grid-cols-[2fr_1fr]">
       <div className="md:border-r-4">
         {/* image */}
@@ -39,7 +42,7 @@ const ProductViewComponent = () => {
         {/* product title */}
         <div className={`
         grid
-        grid-cols-[1fr_12em_auto]
+        grid-cols-[1fr_auto_auto]
         content-center
         border-b-4
         sticky
@@ -47,11 +50,11 @@ const ProductViewComponent = () => {
         h-14
         bg-[--primary-color]
         `}>
-          <span className="p-4 text-xl font-bold">Product Title</span>
-          <Link to={"/product/1/edit"} className="p-3 pr-1.5" >
-            <ButtonComponent className="border-4">Edit Product</ButtonComponent>
+          <span className="p-4 text-sm sm:text-xl font-bold">Product Title</span>
+          <Link to={"/product/1/edit"} className="h-full w-full justify-self-center self-center" >
+            <ButtonComponent className="border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold">Edit</ButtonComponent>
           </Link>
-          <span className="border-l-4 p-4">Type</span>
+          <span className="text-sm sm:text-base border-l-4 p-4">Type Master</span>
         </div>
 
         {/* description */}
@@ -122,6 +125,7 @@ const ProductViewComponent = () => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 
