@@ -2,7 +2,7 @@ import { IconContext } from "react-icons";
 import { BiX } from "react-icons/bi";
 import ButtonComponent from "./Button";
 
-const ModalComponent = ({ children, title = '', isActive = false, dismiss }:any) => {
+const ModalComponent = ({ children, title = '', isActive = false, dismiss }: { title: string, isActive: boolean, dismiss: (args?:any) => any, [key:string]: any }) => {
   return (
     <div className={`
     h-full

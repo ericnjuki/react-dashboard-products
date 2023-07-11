@@ -1,14 +1,15 @@
-.editor {
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  cursor: text;
-  padding: 16px;
-  border-radius: 2px;
-  margin-bottom: 2em;
-  box-shadow: inset 0px 1px 8px -3px #ABABAB;
-  background: #fefefe;
+.ql-editor p {
+  line-height: 2;
+  font-size: 1.2em;
 }
 
-.editor :global(.public-DraftEditor-content) {
-  min-height: 140px;
+.ql-toolbar {
+  background-color: var(--secondary-color);
+}
+.ql-editor {
+  background-color: var(--input-color);
+}
+
+.ql-container.ql-snow {
+  border-bottom: 4px solid var(--secondary-color);
 }

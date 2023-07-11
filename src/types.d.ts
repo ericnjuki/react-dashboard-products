@@ -48,3 +48,8 @@ type IAppState = {
   config?: number | null,
   error?: any
 };
+
+type IdName = {
+  id?: number,
+  name: string,
+}

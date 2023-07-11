@@ -1,11 +1,10 @@
-import { BiBriefcaseAlt2, BiChip, BiMoney, BiTimer } from "react-icons/bi"
 import ProductDetailComponent from "./lib/ProductDetail"
 import OfferedByDetails from "./lib/OfferedByDetails"
-import ButtonComponent from "../common/Button"
-import { Link } from "react-router-dom"
 import { connect } from "react-redux"
-import { ReactElement } from "react"
 import MapComponent from "./lib/Map"
+import ProductImageComponent from "./ProductImage"
+import ProductTitleComponent from "./ProductTitle"
+import { getProductDetails } from "./lib/utils"
 
 
 type IProductViewProps = IAppState & { [key:string]: any }
@@ -85,21 +84,6 @@ const ProductViewComponent = ({
     ]
   }
 
-  const getProductDetails = (product: IProduct): {title: string, icon: ReactElement, tags: any[]}[] | [] => {
-    if (product) {
-      const categories: string[] = product.categories.map((cat) => cat.name);
-      const cost = product?.investmentEffort;
-      const businessModels = product?.businessModels.map((bm) => bm.name);
-      const trl = product?.trl.name;
-      return [
-        { title: "Technologies", icon: <BiChip />, tags: categories}, 
-        { title: "Business Models", icon: <BiBriefcaseAlt2 />, tags: businessModels},
-        { title: "TRL", icon: <BiTimer />, tags: [trl]},
-        { title: "Cost", icon: <BiMoney />, tags: [cost]}
-      ];
-    } else return [];
-  }
-
   const formatVideoURLForEmbed = (url: string): string => {
     let videoId = null;
     if (url.indexOf('?v=') !== -1 && url.indexOf('&') !== -1) {
@@ -128,31 +112,10 @@ const ProductViewComponent = ({
     <div className="grid grid-rows-[min-content] md:grid-cols-[2fr_1fr]">
       <div className="md:border-r-4">
         {/* image */}
-        <div 
-        style={{backgroundImage: `url(${product.picture})`}}
-        className={`
-        bg-cover
-        h-96
-        border-b-4
-        `}></div>
+        <ProductImageComponent imageUrl={product.picture} />
 
         {/* product title */}
-        <div className={`
-        grid
-        grid-cols-[1fr_auto_auto]
-        content-center
-        border-b-4
-        sticky
-        top-14
-        h-14
-        bg-[--primary-color]
-        `}>
-          <span className="p-4 text-sm sm:text-xl font-bold">{product?.name}</span>
-          <Link to={"/product/1/edit"} className="h-full w-full justify-self-center self-center" >
-            <ButtonComponent className="border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold">Edit</ButtonComponent>
-          </Link>
-          <span className="text-sm sm:text-base border-l-4 p-4">{product?.type.name}</span>
-        </div>
+        <ProductTitleComponent productTitle={product?.name} productType={product?.type.name} isEditable />
 
         {/* description */}
         <div className={`
@@ -187,8 +150,10 @@ const ProductViewComponent = ({
               <ProductDetailComponent 
                 title={detail.title}
                 icon={detail.icon} 
-                tags={detail.tags} />
-            ))}
+                tags={detail.tags} 
+                isEditable={false}  
+              />
+          ))}
         </div>
 
         {/* video */}

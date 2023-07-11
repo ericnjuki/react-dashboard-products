@@ -7,7 +7,6 @@ type MapProps = {
   address: IAddress,
 }
 const MapComponent = ({ className, height, address }: MapProps) => {
-  console.log('KEY: ', MAPS_API_KEY);
 return (
   <iframe
     className={className}

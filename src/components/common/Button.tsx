@@ -1,6 +1,6 @@
 type ButtonProps = {
-  className: string,
-  onClick?: () => any, 
+  className?: string,
+  onClick?: (args?:any) => any, 
   [key:string]: any
 }
 const ButtonComponent = ({ className='', children, onClick }: ButtonProps) => {

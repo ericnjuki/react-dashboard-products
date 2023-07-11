@@ -1,71 +1,128 @@
+import { ReactElement, useState } from "react";
 import { IconContext } from "react-icons";
-import { BiX } from "react-icons/bi";
+import { BiCaretDown, BiPlus, BiX } from "react-icons/bi";
+import ButtonComponent from "../../common/Button";
+import TagType from "../../../constants/tagTypes";
 
-const ProductDetailComponent = ({ title, icon, tags, isEditable, onChange }: any) => {
+type ProductDetailProps = {
+  title: string, 
+  icon: ReactElement,
+  tags: IdName[],
+  isEditable: boolean,
+  onChangeTags?: (...args:any) => any,
+  trls?: Array<{ id: string, name: string, description: string | null}> | [],
+  setToggleTRLModal?: any,
+}
+
+const NewTagComponent = ({ onEnterNewTag }: { onEnterNewTag: (arg: string) => void }) => {
+  const [inputTarget, setInputTarget] = useState<any>();
+  const [newTagValue, setNewTagValue] = useState<string>('');
+
+  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    setNewTagValue(target.value);
+    setInputTarget(target);
+  }
+
+  const clearTarget = () => {
+    if (inputTarget) {
+      inputTarget.value = '';
+    }
+  }
+  const handleEnter = (e: React.KeyboardEvent | null) => {
+    if (e !== null) {
+      const target = e.target as HTMLInputElement;
+      if (e.code === 'Enter') {
+        onEnterNewTag(target.value);
+        e.preventDefault();
+        clearTarget();
+      }
+    } else if (newTagValue) {
+      onEnterNewTag(newTagValue);
+      clearTarget();
+    }
+  }
   return (
-    <div>
-      <div className="flex mt-4">
+    <li className={`
+    border-[--input-color]
+    border-2
+    text-xs
+    font-semibold
+    mr-2
+    mb-2
+    flex
+    items-center
+    justify-between
+    `}>
+      <input 
+        // ref={tagField}
+        placeholder="add item" 
+        type="text" 
+        className="p-1 h-full w-auto focus-visible:outline-none"
+        // value={value}
+        onChange={handleChange}
+        onKeyDown={(e) => handleEnter(e)}
+      />
+      <ButtonComponent onClick={() => {handleEnter(null)}}>
         <IconContext.Provider value={{ className: "w-6 h-6" }}>
           <div>
-            {icon}
+            <BiPlus />
           </div>
         </IconContext.Provider>
-        <span className="pl-4">{title}</span>
+      </ButtonComponent>
+    </li>
+  )
+}
+
+const ProductDetailComponent = ({ title, icon, tags, isEditable, onChangeTags, setToggleTRLModal }: ProductDetailProps) => {
+
+  return (
+    <>
+      <div className="border-b-4 p-4">
+        <div className="flex mt-4">
+          <IconContext.Provider value={{ className: "w-6 h-6" }}>
+            <div>
+              {icon}
+            </div>
+          </IconContext.Provider>
+          <span className="pl-4">{title}</span>
+        </div>
+        <ul className="pt-4 flex flex-wrap">
+          {/* TODO: proper customizability with isEditable? */}
+          {tags.map((item: IdName, i: number) => {
+            return (
+              <li 
+              key={`${i}${item.id}${item.name}`}
+              onClick={title !== TagType.TRL.title ? () =>  {} : () => setToggleTRLModal(true)}
+              className={`
+              border-2
+              text-xs
+              font-semibold
+              mr-2
+              mb-2
+              ${!isEditable && 'px-4 py-1'}
+              ${isEditable && 'flex items-center justify-between'}
+              `}>
+                <span className={`${isEditable && 'pl-2 pr-2 py-1'}`}>{item.name}</span>
+                {isEditable && (
+                  <span
+                    onClick={title !== TagType.TRL.title ? () => onChangeTags!(item.name, true) : () => {}}
+                    className="border-l-2 h-full flex items-center bg-[--input-color]"
+                  >
+                    <IconContext.Provider value={{ className: "w-5 h-5" }}>
+                      <div>
+                        {title === TagType.TRL.title ? <BiCaretDown /> : <BiX />}
+                      </div>
+                    </IconContext.Provider>
+                  </span>
+                )}
+              </li>
+            )
+          })}
+          {isEditable && title !== TagType.TRL.title && <NewTagComponent onEnterNewTag={onChangeTags!} />}
+        </ul>
       </div>
-      <ul className="pt-4 flex flex-wrap">
-        {/* TODO: proper customizability with isEditable? */}
-        {tags.map((item:string, i:number) => {
-          return <li className={`
-          border-2
-          text-xs
-          font-semibold
-          mr-2
-          mb-2
-          ${!isEditable && 'px-4 py-1'}
-          ${isEditable && 'flex items-center justify-between'}
-          `}
-          key={`${i}${item}`}
-          >
-            <span className={`${isEditable && 'pl-2 pr-2 py-1'}`}>{item}</span>
-            {isEditable && (
-              <span className="border-l-2 h-full flex items-center bg-[--input-color]">
-                <IconContext.Provider value={{ className: "w-5 h-5" }}>
-                  <div>
-                    <BiX />
-                  </div>
-                </IconContext.Provider>
-              </span>
-            )}
-          </li>
-        })}
-        {isEditable && (
-        <li className={`
-        border-[--input-color]
-        border-2
-        text-xs
-        font-semibold
-        mr-2
-        mb-2
-        ${!isEditable && 'px-4 py-1'}
-        ${isEditable && 'flex items-center justify-between'}
-        `}>
-          <input 
-            placeholder="type and press enter" 
-            type="text" 
-            className="p-1 h-full w-full focus-visible:outline-none"
-            // TODO: put in handler
-            onKeyDown={(e: React.KeyboardEvent) => {
-              const target = e.target as HTMLInputElement;
-              if (e.code === 'Enter') {
-                onChange(target.value);
-                e.preventDefault();
-              }
-            }}
-          />
-        </li>
-        )}
-      </ul>
-    </div>
+    </>
   )
 }
 export default ProductDetailComponent;
