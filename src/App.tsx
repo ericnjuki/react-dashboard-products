@@ -8,7 +8,7 @@ import { API } from './constants/api';
 import { getConfigSuccess } from './actions/AppActions';
 const APP_ID = import.meta.env.VITE_APP_ID || 1;
 
-const App = (props: { [key: string]: any }) => {
+const App = (props: { [key: string]: unknown }) => {
   const config = props.config as IConfig;
   const dispatch = useDispatch();
   const [style, setStyle] = useState<React.CSSProperties>({});
@@ -28,7 +28,7 @@ const App = (props: { [key: string]: any }) => {
         })
         .catch((e) => console.log('UH OH', e));
     }
-  }, [config]);
+  }, [config, dispatch]);
 
   return (
     <div className='max-w-[1280px] h-[100svh] m-auto'>

@@ -44,6 +44,6 @@ export function nameof<T>(
   const res: { [Property in keyof T]: () => string } = {} as {
     [Property in keyof T]: () => string;
   };
-  Object.keys(obj as Object).map((k) => (res[k as keyof T] = () => k));
+  Object.keys(obj as object).map((k) => (res[k as keyof T] = () => k));
   return expression(res)();
 }

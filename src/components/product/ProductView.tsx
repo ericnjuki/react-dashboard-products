@@ -26,7 +26,7 @@ const ProductViewComponent = ({ product, config }: IProductViewProps) => {
         })
         .catch((e) => console.log('UH OH', e));
     }
-  }, [product]);
+  }, [product, dispatch]);
 
   const formatVideoURLForEmbed = (url: string): string => {
     let videoId = null;
@@ -123,7 +123,6 @@ const ProductViewComponent = ({ product, config }: IProductViewProps) => {
             `}
             >
               <h4 className='font-bold pb-4 pl-4'>Video</h4>
-              {/* @ts-ignore:next-line */}
               <iframe
                 className='w-full'
                 height='315'

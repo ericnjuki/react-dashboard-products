@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { API } from '../../constants/api';
 
-type IProductListProps = IAppState & { [key: string]: any };
+type IProductListProps = IAppState & { [key: string]: unknown };
 
 const ProductListComponent = ({
   // getProductsAction,
@@ -26,7 +26,7 @@ const ProductListComponent = ({
         })
         .catch((e) => console.log('UH OH', e));
     }
-  }, [allProducts]);
+  }, [allProducts, dispatch]);
 
   useEffect(() => {
     // TODO: DOESN'T WORK (cors)

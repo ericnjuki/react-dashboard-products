@@ -32,7 +32,7 @@ type EditableProductFields =
       investmentEffort?: string;
       description: string;
     }
-  | {};
+  | object;
 
 type IProductEditProps = IAppState & { [key: string]: any };
 
@@ -65,7 +65,7 @@ const ProductEditComponent = ({
       setProductIn(productCopy);
       setDescription(product.description);
     }
-  }, [product]);
+  }, [product, dispatch]);
 
   useEffect(() => {
     if (!TRLData || TRLData?.length === 0) {
@@ -77,7 +77,7 @@ const ProductEditComponent = ({
         })
         .catch((e) => console.log('UH OH', e));
     }
-  }, [TRLData]);
+  }, [TRLData, dispatch]);
 
   const handleUploadProductImage = (
     e: React.SyntheticEvent<HTMLInputElement>,
@@ -112,7 +112,7 @@ const ProductEditComponent = ({
       const productCopy = { ...productIn };
       const editedFieldsCopy = { ...editedFields };
       switch (tagType) {
-        case TagType.BUSINESS_MODELS.title:
+        case TagType.BUSINESS_MODELS.title: {
           const newBusinessModel = { id: -1, name: value };
           if (!isRemove) productCopy.businessModels.push(newBusinessModel);
           else
@@ -124,7 +124,9 @@ const ProductEditComponent = ({
           editedFieldsCopy.businessModels = productCopy.businessModels;
           setEditedFields(editedFieldsCopy);
           break;
-        case TagType.CATEGORIES.title:
+        }
+
+        case TagType.CATEGORIES.title: {
           // push
           const newCategory = { id: -1, name: value };
           if (!isRemove) productCopy.categories.push(newCategory);
@@ -137,7 +139,9 @@ const ProductEditComponent = ({
           editedFieldsCopy.categories = productCopy.categories;
           setEditedFields(editedFieldsCopy);
           break;
-        case TagType.TRL.title:
+        }
+
+        case TagType.TRL.title: {
           // replace
           const newTrl = { id: -1, name: value };
           productCopy.trl = newTrl;
@@ -146,7 +150,9 @@ const ProductEditComponent = ({
           editedFieldsCopy.trl = newTrl;
           setEditedFields(editedFieldsCopy);
           break;
-        case TagType.INVESTMENT_EFFORT.title:
+        }
+
+        case TagType.INVESTMENT_EFFORT.title: {
           // replace
           const newInvestmentEffort = value;
           productCopy.investmentEffort = value;
@@ -155,6 +161,7 @@ const ProductEditComponent = ({
           editedFieldsCopy.investmentEffort = newInvestmentEffort;
           setEditedFields(editedFieldsCopy);
           break;
+        }
         default:
           break;
       }
