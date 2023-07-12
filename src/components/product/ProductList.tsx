@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ButtonComponent from "../common/Button";
 import { Dispatch, bindActionCreators } from "redux";
-import { getProducts, getProductsSuccess } from "../../redux-actions/AppActions";
+import { getProducts, getProductsSuccess } from "../../actions/AppActions";
 import { connect, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";

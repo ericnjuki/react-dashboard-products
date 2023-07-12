@@ -1,12 +1,12 @@
 import ProductDetailComponent from "./lib/ProductDetail"
 import OfferedByDetails from "./lib/OfferedByDetails"
 import { connect, useDispatch } from "react-redux"
-import MapComponent from "./lib/Map"
-import ProductImageComponent from "./ProductImage"
-import ProductTitleComponent from "./ProductTitle"
+import MapComponent from "../common/Map"
+import ProductImageComponent from "./lib/ProductImage"
+import ProductTitleComponent from "./lib/ProductTitle"
 import { getProductDetails } from "./lib/utils"
 import { useEffect } from "react"
-import { getProductByIdSuccess } from "../../redux-actions/AppActions"
+import { getProductByIdSuccess } from "../../actions/AppActions"
 import axios from "axios"
 import { API } from "../../constants/api"
 
@@ -130,6 +130,7 @@ const ProductViewComponent = ({ product, config }: IProductViewProps) => {
         <div className={`
         border-b-4
         py-4
+        ${config?.hasUserSection && 'md:hidden'}
         `}>
           <h4 className="font-bold pb-4 pl-4">Map</h4>
           <MapComponent className="w-full" height="315" address={product?.company?.address} />  

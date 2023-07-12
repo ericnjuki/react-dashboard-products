@@ -1,18 +1,18 @@
 import { BiEdit } from "react-icons/bi"
 import ProductDetailComponent from "./lib/ProductDetail"
 import OfferedByDetails from "./lib/OfferedByDetails"
-import DraftEditor from "./editor"
+import DraftEditor from "./lib/DraftEditor"
 import { useEffect, useState } from "react"
 import { IconContext } from "react-icons"
-import ProductImageComponent from "./ProductImage"
-import ProductTitleComponent from "./ProductTitle"
-import ProductInputFieldComponent from "./ProductInputField"
+import ProductImageComponent from "./lib/ProductImage"
+import ProductTitleComponent from "./lib/ProductTitle"
+import ProductInputFieldComponent from "./lib/ProductInputField"
 import { getProductDetails } from "./lib/utils"
 import TagType from "../../constants/tagTypes"
 import axios from "axios"
 import { API } from "../../constants/api"
 import { connect, useDispatch } from "react-redux"
-import { getProductByIdSuccess, getTRLSuccess, putProductByIdSuccess } from "../../redux-actions/AppActions"
+import { getProductByIdSuccess, getTRLSuccess, putProductByIdSuccess } from "../../actions/AppActions"
 import ModalComponent from "../common/Modal"
 import ButtonComponent from "../common/Button"
 import { useNavigate } from "react-router-dom"
@@ -77,8 +77,10 @@ const ProductEditComponent = ({ product, trl: TRLData, config }: IProductEditPro
       formData.append("key", key);
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent<FileReader>) => {
-        console.log(e.target?.result);
         setNewProductImage(e.target?.result);
+        const editedFieldsCopy = { ...editedFields };
+        editedFieldsCopy.picture = `${(e.target?.result as string).substring(0, 50)}...`;
+        setEditedFields(editedFieldsCopy);
       }
       reader.readAsDataURL(target.files[0]);
     }

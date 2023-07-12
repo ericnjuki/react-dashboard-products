@@ -1,6 +1,6 @@
 import { IconContext } from "react-icons";
 import { BiSearch, BiCaretDown } from "react-icons/bi";
-import ButtonComponent from "./common/Button";
+import ButtonComponent from "./Button";
 
 const SearchComponent = () => {
   return (

@@ -1,9 +1,9 @@
 import { IconContext } from "react-icons";
-import { BiGlobe, BiMenu } from "react-icons/bi";
+import { BiMenu } from "react-icons/bi";
 import Logo from "./Logo";
 import SearchComponent from "./Search";
-import ButtonComponent from "./common/Button";
-import ModalComponent from "./common/Modal";
+import ButtonComponent from "./Button";
+import ModalComponent from "./Modal";
 import { useEffect, useState } from "react";
 import SideBarNavComponent from "./SideBarNav";
 import { connect } from "react-redux";

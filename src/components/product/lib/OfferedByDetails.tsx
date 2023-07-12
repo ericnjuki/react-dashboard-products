@@ -1,6 +1,6 @@
 import { IconContext } from "react-icons";
 import { BiLocationPlus } from "react-icons/bi";
-import MapComponent from "./Map";
+import MapComponent from "../../common/Map";
 
 const OfferedByDetails = ({ user, company }: { user: IUser | undefined, company: ICompany | undefined }) => {
   return (

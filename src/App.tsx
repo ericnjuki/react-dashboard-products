@@ -1,12 +1,12 @@
 
-import HeaderComponent from "./components/Header";
-import SideBarNavComponent from "./components/SideBarNav";
+import HeaderComponent from "./components/common/Header";
+import SideBarNavComponent from "./components/common/SideBarNav";
 import { Outlet } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "./constants/api";
-import { getConfigSuccess } from "./redux-actions/AppActions";
+import { getConfigSuccess } from "./actions/AppActions";
 const APP_ID = import.meta.env.VITE_APP_ID || 1;
 
 const App = (props : { [key:string]: any }) => {

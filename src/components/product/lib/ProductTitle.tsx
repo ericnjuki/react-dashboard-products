@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ButtonComponent from "../common/Button";
+import ButtonComponent from "../../common/Button";
 
 type ProductTitleProps = { 
   productTitle: string, 
