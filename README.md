@@ -16,15 +16,17 @@
 
 ```jsx
 git clone
+cp .env.example .env // add your Google Maps API Key for Maps to work
 nvm use 16 // if you have nvm
 npm i // must use node v16
 npm run dev // dev server
 npm run lint // eslint + prettier
-npm run build // deploy /dist folder; Or just use Vercel + github repo;
+npm run build // deploy the /dist folder; Or just use Vercel ;)
 ```
 
 ## **Features**
-### *A Main (/) route*
+
+### _A Main (/) route_
 
 Has one component
 
@@ -32,29 +34,30 @@ Has one component
 
 <br>
 
-### *Product View (/product)*
+### _Product View (/product)_
+
 Hase multiple sections:
 
 - Main Section
-    - Image
-    - Title
-    - Type
-    - Description
+  - Image
+  - Title
+  - Type
+  - Description
 - Details Section
-    - Technologies/Categories
-    - Business Models
-    - [TRL](https://en.wikipedia.org/wiki/Technology_readiness_level)
-    - Investment Effort / Cost
+  - Technologies/Categories
+  - Business Models
+  - [TRL](https://en.wikipedia.org/wiki/Technology_readiness_level)
+  - Investment Effort / Cost
 - Video (embedded Youtube video)
 - User Info Section:
-    - Image
-    - Name
-    - Company Name
+  - Image
+  - Name
+  - Company Name
 - Google Map to display company address of the product
 
 <br>
 
-### *Product Edit (/product/edit)*
+### _Product Edit (/product/edit)_
 
 Allows you to edit:
 
@@ -64,9 +67,9 @@ Allows you to edit:
 - Youtube Video URL
 - Product tags
 
-<br> 
+<br>
 
-### *White-Labeling Feature*
+### _White-Labeling Feature_
 
 Allows you to save an APP_ID to your .env.
 
@@ -76,7 +79,7 @@ To retrieve various configs like color etc.
 
 <br>
 
-### *Responsive Design*
+### _Responsive Design_
 
 Mobile-first!
 
