@@ -3,7 +3,6 @@ import ButtonComponent from "./common/Button";
 import axios from "axios";
 import { API } from "../constants/api";
 import { getConfigSuccess } from "../actions/AppActions";
-const APP_ID = import.meta.env.VITE_APP_ID || 1;
 
 
 const OrganizationsComponent = () => {
