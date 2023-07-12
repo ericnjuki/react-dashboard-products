@@ -1,12 +1,16 @@
 # react-products-demo
 
+A simple dashboard that fetches a product, displays it, and allows you to edit it
+
+![React Badge](https://img.shields.io/badge/Framework-React-informational?style=flat&logo=react&logoColor=white&color=blue)
+![TypeScript Badge](https://img.shields.io/badge/Lang-TypeScript-informational?style=flat&logo=typescript&logoColor=white&color=blue)
+![Tailwind Badge](https://img.shields.io/badge/Framework-TailWind-informational?style=flat&logo=tailwindcss&logoColor=white&color=lightblue)
+<!-- ![Vite Badge](https://img.shields.io/badge/Dev-Vite-informational?style=flat&logo=vite&logoColor=white&color=orange)
+![Project Duration Badge](https://img.shields.io/badge/duration-1%20week-black) -->
+
 ## Live Demo
 
 [Link](https://react-dashboard-products.vercel.app/)
-
-**What is this?**
-
-- A simple dashboard that fetches a product, displays it, and allows you to edit it
 
 **What’s up with the weird design dude?**
 
