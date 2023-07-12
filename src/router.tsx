@@ -1,39 +1,37 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
-import App from "./App";
-import ProductViewComponent from "./components/product/ProductView";
-import HomeComponent from "./components/Home";
-import ProductListComponent from "./components/product/ProductList";
-import ProductEditComponent from "./components/product/ProductEdit";
-import OrganizationsComponent from "./components/Organizations";
+import { createBrowserRouter } from 'react-router-dom';
+import App from './App';
+import ProductViewComponent from './components/product/ProductView';
+import HomeComponent from './components/Home';
+import ProductListComponent from './components/product/ProductList';
+import ProductEditComponent from './components/product/ProductEdit';
+import OrganizationsComponent from './components/Organizations';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     // errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
-        element: <HomeComponent />
+        path: '/',
+        element: <HomeComponent />,
       },
       {
-        path: "/organizations",
-        element: <OrganizationsComponent />
+        path: '/organizations',
+        element: <OrganizationsComponent />,
       },
       {
-        path: "/allproducts",
-        element: <ProductListComponent />
+        path: '/allproducts',
+        element: <ProductListComponent />,
       },
       {
-        path: "product",
+        path: 'product',
         element: <ProductViewComponent />,
       },
       {
-        path: "product/edit",
+        path: 'product/edit',
         element: <ProductEditComponent />,
-      }
+      },
     ],
   },
 ]);

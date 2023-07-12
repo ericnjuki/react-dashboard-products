@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom";
-import ButtonComponent from "../../common/Button";
+import { Link } from 'react-router-dom';
+import ButtonComponent from '../../common/Button';
 
-type ProductTitleProps = { 
-  productTitle: string, 
-  productType: string,
-  config: string,
-  onSave?: () => any,
-}
-const ProductTitleComponent = (
-  { productTitle, productType, config, onSave }: ProductTitleProps
-  ) => {
+type ProductTitleProps = {
+  productTitle: string;
+  productType: string;
+  config: string;
+  onSave?: () => any;
+};
+const ProductTitleComponent = ({
+  productTitle,
+  productType,
+  config,
+  onSave,
+}: ProductTitleProps) => {
   return (
-    <div className={`
+    <div
+      className={`
     grid
     grid-cols-[1fr_auto_auto]
     content-center
@@ -21,20 +25,31 @@ const ProductTitleComponent = (
     h-14
     bg-[--primary-color]
     z-10  
-    `}>
-      <span className="p-4 text-sm sm:text-xl font-bold">{productTitle}</span>
-      {config === "Edit" ? (
-        <Link to={`/product/edit`} className="h-full w-full justify-self-center self-center" >
-          <ButtonComponent className="border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold">Edit</ButtonComponent>
+    `}
+    >
+      <span className='p-4 text-sm sm:text-xl font-bold'>{productTitle}</span>
+      {config === 'Edit' ? (
+        <Link
+          to={`/product/edit`}
+          className='h-full w-full justify-self-center self-center'
+        >
+          <ButtonComponent className='border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold'>
+            Edit
+          </ButtonComponent>
         </Link>
       ) : (
-        <div onClick={onSave} className="h-full w-full justify-self-center self-center" >
-          <ButtonComponent className="border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold">Save</ButtonComponent>
+        <div
+          onClick={onSave}
+          className='h-full w-full justify-self-center self-center'
+        >
+          <ButtonComponent className='border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold'>
+            Save
+          </ButtonComponent>
         </div>
       )}
-      <span className="text-sm sm:text-base border-l-4 p-4">{productType}</span>
+      <span className='text-sm sm:text-base border-l-4 p-4'>{productType}</span>
     </div>
-  )
-}
+  );
+};
 
 export default ProductTitleComponent;

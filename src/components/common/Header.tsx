@@ -1,12 +1,12 @@
-import { IconContext } from "react-icons";
-import { BiMenu } from "react-icons/bi";
-import Logo from "./Logo";
-import SearchComponent from "./Search";
-import ButtonComponent from "./Button";
-import ModalComponent from "./Modal";
-import { useEffect, useState } from "react";
-import SideBarNavComponent from "./SideBarNav";
-import { connect } from "react-redux";
+import { IconContext } from 'react-icons';
+import { BiMenu } from 'react-icons/bi';
+import Logo from './Logo';
+import SearchComponent from './Search';
+import ButtonComponent from './Button';
+import ModalComponent from './Modal';
+import { useEffect, useState } from 'react';
+import SideBarNavComponent from './SideBarNav';
+import { connect } from 'react-redux';
 
 const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
   const { product } = props;
@@ -17,8 +17,8 @@ const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
 
   useEffect(() => {
     if (config) {
-      const primaryColorStyle = { 
-        "--primary-color": config.mainColor,
+      const primaryColorStyle = {
+        '--primary-color': config.mainColor,
       } as React.CSSProperties;
       setStyle(primaryColorStyle);
     }
@@ -26,20 +26,26 @@ const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
-  }
+  };
 
-  const dismissModal = () => { setShowMenu(false); }
+  const dismissModal = () => {
+    setShowMenu(false);
+  };
   return (
     <>
-      <ModalComponent title="" isActive={showMenu} dismiss={dismissModal}>
+      <ModalComponent
+        title=''
+        isActive={showMenu}
+        dismiss={dismissModal}
+      >
         {/* TODO: can do better, maybe menu component? */}
         <div onClick={dismissModal}>
           <SideBarNavComponent />
         </div>
       </ModalComponent>
-      <nav 
-      style={style}
-      className={`
+      <nav
+        style={style}
+        className={`
       h-14
       w-full
       max-w-[1280px]
@@ -52,26 +58,28 @@ const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
       border-4
       bg-[--primary-color]
       z-10
-      `}>
-        <div className="hidden lg:grid">
-          <div className="border-r-4 flex items-center justify-center bg-[--secondary-color]">
-              <Logo src={config?.logo} />
+      `}
+      >
+        <div className='hidden lg:grid'>
+          <div className='border-r-4 flex items-center justify-center bg-[--secondary-color]'>
+            <Logo src={config?.logo} />
           </div>
         </div>
-        <div className="grid grid-cols-[1fr_2fr] lg:grid-cols-1">
+        <div className='grid grid-cols-[1fr_2fr] lg:grid-cols-1'>
           {/* logo */}
-          <div className="border-r-4 flex items-center justify-center lg:hidden bg-[--secondary-color]">
+          <div className='border-r-4 flex items-center justify-center lg:hidden bg-[--secondary-color]'>
             <Logo src={config?.logo} />
           </div>
 
           {/* search */}
-          <div className="border-r-4">
+          <div className='border-r-4'>
             <SearchComponent />
           </div>
         </div>
 
         {/* profile & localization */}
-        <div className={`
+        <div
+          className={`
           hidden 
           md:grid
           md:grid-cols-[1fr_1.5fr_3.5em]
@@ -79,35 +87,41 @@ const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
           md:w-40
           lg:grid-cols-2
           lg:w-28
-        `}>
+        `}
+        >
           {/* localization */}
-          <ButtonComponent className="border-r-4">
-            <IconContext.Provider value={{ className: "w-6 h-6" }}>
-              <div>
-                {/* <BiGlobe /> */}
-              </div>
+          <ButtonComponent className='border-r-4'>
+            <IconContext.Provider value={{ className: 'w-6 h-6' }}>
+              <div>{/* <BiGlobe /> */}</div>
             </IconContext.Provider>
           </ButtonComponent>
 
           {/* profile pic */}
-          <ButtonComponent className="grid-cols-1">
-            <div 
-            style={{ backgroundImage: `url(${product?.user?.profilePicture || '/vite.svg'})` }}
-            className={`
+          <ButtonComponent className='grid-cols-1'>
+            <div
+              style={{
+                backgroundImage: `url(${
+                  product?.user?.profilePicture || '/vite.svg'
+                })`,
+              }}
+              className={`
               bg-contain
               bg-no-repeat
               bg-[--secondary-color]
               h-full
               bg-center
-            `}></div>
+            `}
+            ></div>
           </ButtonComponent>
 
           {/* menu button */}
-          <ButtonComponent 
-            className="lg:hidden w-14 flex items-center justify-center"
+          <ButtonComponent
+            className='lg:hidden w-14 flex items-center justify-center'
             onClick={toggleMenu}
           >
-            <IconContext.Provider value={{ className: "w-6 h-6 [stroke-width:1]" }}>
+            <IconContext.Provider
+              value={{ className: 'w-6 h-6 [stroke-width:1]' }}
+            >
               <div>
                 <BiMenu />
               </div>
@@ -116,11 +130,13 @@ const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
         </div>
 
         {/* menu button */}
-        <ButtonComponent 
-          className="md:hidden w-14 flex items-center justify-center"
+        <ButtonComponent
+          className='md:hidden w-14 flex items-center justify-center'
           onClick={toggleMenu}
         >
-          <IconContext.Provider value={{ className: "w-6 h-6 [stroke-width:1]" }}>
+          <IconContext.Provider
+            value={{ className: 'w-6 h-6 [stroke-width:1]' }}
+          >
             <div>
               <BiMenu />
             </div>
@@ -129,10 +145,10 @@ const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
       </nav>
     </>
   );
-}
+};
 
 const mapStateToProps = ({ app }: { app: IAppState }) => {
   const { config, product } = app;
-  return { config, product }
-}
+  return { config, product };
+};
 export default connect(mapStateToProps, null)(HeaderComponent);
