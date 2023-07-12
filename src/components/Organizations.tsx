@@ -17,7 +17,7 @@ const OrganizationsComponent = () => {
         id: -1,
         logo: '/vite.svg',
         mainColor: '#242424',
-        hasUserSection: false
+        hasUserSection: true
       }));
     } else {
       axios
@@ -32,9 +32,9 @@ const OrganizationsComponent = () => {
   }
   return (
     <ul className="h-[calc(100svh-7em)]">
-      <li key={-2} className="p-4 border-b-4 h-14 hover:bg-[--secondary-color] hover:text-[--primary-color]">
-        <ButtonComponent onClick={() => { changeTheme(APP_ID) }}>
-          Apply from Config {`{${APP_ID}}`}
+      <li key={-1} className="p-4 border-b-4 h-14 hover:bg-[--secondary-color] hover:text-[--primary-color]">
+        <ButtonComponent onClick={() => { changeTheme(-1) }}>
+          Reset to Default
         </ButtonComponent>
       </li>
       {organizations.map((org) => (

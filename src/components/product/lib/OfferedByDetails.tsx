@@ -26,7 +26,7 @@ const OfferedByDetails = ({ user, company }: { user: IUser | undefined, company:
             p-4
             bg-[--secondary-color]
             `}>
-              <img src="/innoloft_logo.png"/>
+              <img src={company.logo || '/vite.svg'} />
             </div>
     
             {/* user card */}
