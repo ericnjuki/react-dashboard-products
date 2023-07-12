@@ -7,7 +7,8 @@ import appReducer from './AppReducer';
 
 const persistConfigApp = {
     key: 'app',
-    storage: localforage
+    storage: localforage,
+    whitelist: ["product"]
 };
 
 const allReducers = combineReducers({

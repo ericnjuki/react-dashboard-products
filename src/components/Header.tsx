@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import SideBarNavComponent from "./SideBarNav";
 import { connect } from "react-redux";
 
-const HeaderComponent = (props: any) => {
+const HeaderComponent = (props: IAppState & { [key: string]: any }) => {
+  const { product } = props;
   const config = props.config as IConfig;
   const [style, setStyle] = useState<React.CSSProperties>({});
 
@@ -59,8 +60,8 @@ const HeaderComponent = (props: any) => {
         </div>
         <div className="grid grid-cols-[1fr_2fr] lg:grid-cols-1">
           {/* logo */}
-          <div className="border-r-4 flex items-center justify-center lg:hidden">
-            <Logo />
+          <div className="border-r-4 flex items-center justify-center lg:hidden bg-[--secondary-color]">
+            <Logo src={config?.logo} />
           </div>
 
           {/* search */}
@@ -83,17 +84,18 @@ const HeaderComponent = (props: any) => {
           <ButtonComponent className="border-r-4">
             <IconContext.Provider value={{ className: "w-6 h-6" }}>
               <div>
-                <BiGlobe />
+                {/* <BiGlobe /> */}
               </div>
             </IconContext.Provider>
           </ButtonComponent>
 
           {/* profile pic */}
           <ButtonComponent className="grid-cols-1">
-            <div className={`
+            <div 
+            style={{ backgroundImage: `url(${product?.user?.profilePicture || '/vite.svg'})` }}
+            className={`
               bg-contain
               bg-no-repeat
-              bg-[url('/user_8d48197d.png')]
               bg-[--secondary-color]
               h-full
               bg-center
@@ -130,7 +132,7 @@ const HeaderComponent = (props: any) => {
 }
 
 const mapStateToProps = ({ app }: { app: IAppState }) => {
-  const { config } = app;
-  return { config }
+  const { config, product } = app;
+  return { config, product }
 }
 export default connect(mapStateToProps, null)(HeaderComponent);

@@ -88,9 +88,8 @@ const ProductDetailComponent = ({ title, icon, tags, isEditable, onChangeTags, s
       </div>
       <ul className="pt-4 flex flex-wrap">
         {/* TODO: proper customizability with isEditable? */}
-        {tags.map((item: IdName, i: number) => {
-          return (
-            <li 
+        {tags && tags.map((item: IdName, i: number) => {
+          return (item && <li 
             key={`${i}${item.id}${item.name}`}
             onClick={title !== TagType.TRL.title ? () =>  {} : () => setToggleTRLModal(true)}
             className={`

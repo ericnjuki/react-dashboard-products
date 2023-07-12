@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import ButtonComponent from "../common/Button";
 
+type ProductTitleProps = { 
+  productTitle: string, 
+  productType: string,
+  config: string,
+  onSave?: () => any,
+}
 const ProductTitleComponent = (
-  { productTitle, productType, config }: { productTitle: string, productType: string, config: string }
+  { productTitle, productType, config, onSave }: ProductTitleProps
   ) => {
   return (
     <div className={`
@@ -18,11 +24,11 @@ const ProductTitleComponent = (
     `}>
       <span className="p-4 text-sm sm:text-xl font-bold">{productTitle}</span>
       {config === "Edit" ? (
-        <Link to={"/product/1/edit"} className="h-full w-full justify-self-center self-center" >
+        <Link to={`/product/edit`} className="h-full w-full justify-self-center self-center" >
           <ButtonComponent className="border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold">Edit</ButtonComponent>
         </Link>
       ) : (
-        <div onClick={() => {}} className="h-full w-full justify-self-center self-center" >
+        <div onClick={onSave} className="h-full w-full justify-self-center self-center" >
           <ButtonComponent className="border-4 border-r-0 text-sm sm:text-base px-4 inverted font-bold">Save</ButtonComponent>
         </div>
       )}

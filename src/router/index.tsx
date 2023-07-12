@@ -23,17 +23,15 @@ const router = createBrowserRouter([
         element: <OrganizationsComponent />
       },
       {
-        path: "/products",
+        path: "/allproducts",
         element: <ProductListComponent />
       },
       {
-        // path: "/products/:productId",
-        path: "product/:id",
+        path: "product",
         element: <ProductViewComponent />,
       },
       {
-        // path: "/products/:productId",
-        path: "product/:id/edit",
+        path: "product/edit",
         element: <ProductEditComponent />,
       }
     ],

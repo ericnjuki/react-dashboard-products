@@ -6,6 +6,7 @@ const ProductImageComponent = ({ imageUrl }: { imageUrl: string}) => {
     bg-cover
     h-96
     border-b-4
+    bg-[--secondary-color]
     `}></div>
   )
 }

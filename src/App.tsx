@@ -2,11 +2,16 @@
 import HeaderComponent from "./components/Header";
 import SideBarNavComponent from "./components/SideBarNav";
 import { Outlet } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { API } from "./constants/api";
+import { getConfigSuccess } from "./redux-actions/AppActions";
+const APP_ID = import.meta.env.VITE_APP_ID || 1;
 
 const App = (props : { [key:string]: any }) => {
   const config = props.config as IConfig;
+  const dispatch = useDispatch();
   const [style, setStyle] = useState<React.CSSProperties>({});
 
   useEffect(() => {
@@ -15,8 +20,17 @@ const App = (props : { [key:string]: any }) => {
         "--primary-color": config.mainColor,
       } as React.CSSProperties;
       setStyle(primaryColorStyle);
+    } else {
+      axios
+      .get(`${API.getConfig}/${APP_ID}/`)
+      .then((result) => {
+        console.log('SUCCESS', result.data)
+        dispatch(getConfigSuccess(result.data));
+      })
+      .catch(e => console.log('UH OH', e));
     }
   }, [config]);
+
   return (
     <div className="max-w-[1280px] h-[100svh] m-auto">
         <HeaderComponent />

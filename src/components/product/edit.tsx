@@ -11,10 +11,11 @@ import { getProductDetails } from "./lib/utils"
 import TagType from "../../constants/tagTypes"
 import axios from "axios"
 import { API } from "../../constants/api"
-import { useDispatch } from "react-redux"
-import { getTRLSuccess } from "../../redux-actions/AppActions"
+import { connect, useDispatch } from "react-redux"
+import { getProductByIdSuccess, getTRLSuccess, putProductByIdSuccess } from "../../redux-actions/AppActions"
 import ModalComponent from "../common/Modal"
 import ButtonComponent from "../common/Button"
+import { useNavigate } from "react-router-dom"
 
 type EditableProductFields = {
   picture: string
@@ -27,135 +28,46 @@ type EditableProductFields = {
   description: string,
 } | {};
 
-const ProductEditComponent = ({
-  // product
-}) => {
-  const product: IProduct = {
-    "id": 6781,
-    "name": "LoftOS",
-    "description": "<img style=\"height: 0px\" src=a onerror=console.log(\"secret-cookie-value\")>Innoloft <b>creates</b> <script type=\"text/javascript\">console.log(\"test\");</script>the leading B2B tech ecosystem through interconnected research & business networks and marketplaces. With our digital platform technology, we are changing the way business contacts are initiated between economic and innovation actors.\n\nOur unique software-as-a-service (SaaS) solution LoftOS digitizes services provided by governments and public economic agencies, clusters and hubs, as well as event organizers and trade shows. Not only can our LoftOS customers implement their digitization strategy in a matter of months - each platform can also be connected through our system and its data standard. Through this connection, Innoloft and its partners are creating the largest B2B tech ecosystem in the world.\nCompanies, startups, research institutes and other business players use the ecosystem for lead generation, innovation scouting, procurement or partner acquisition.\n",
-    "picture": "https://img.innoloft.com/products/product_783016a3.png",
-    "type": {
-        "id": 2,
-        "name": "Software"
-    },
-    "categories": [
-        {
-            "id": 5101,
-            "name": "IT platforms"
-        },
-        {
-            "id": 5100,
-            "name": "B2B marketplaces"
-        }
-    ],
-    "implementationEffortText": null,
-    "investmentEffort": "< 25.000€",
-    "trl": {
-        "id": 9,
-        "name": "TRL 9 – Actual system proven in operational environment (established product available)"
-    },
-    "video": "https://youtu.be/qjkYA95SL40?t=60",
-    "user": {
-        "id": 284,
-        "email": "example@innoloft.com",
-        "firstName": "Christopher",
-        "lastName": "Stirner",
-        "sex": 1,
-        "profilePicture": "https://img.innoloft.com/users/user_8d48197d.png",
-        "position": "Chief Strategy Officer"
-    },
-    "company": {
-        "name": "Innoloft GmbH",
-        "logo": "https://img.innoloft.com/logos/unt_7838d306.png",
-        "address": {
-            "country": {
-                "name": "Germany"
-            },
-            "city": {
-                "name": "Aachen"
-            },
-            "street": "Jülicher Straße",
-            "house": "72a",
-            "zipCode": "52070",
-            "longitude": "6.100367",
-            "latitude": "50.779729"
-        }
-    },
-    "businessModels": [
-        {
-            "id": 65,
-            "name": "Pay-Per-Use"
-        },
-        {
-            "id": 1155,
-            "name": "Subscription"
-        },
-        {
-            "id": 374,
-            "name": "White-Label"
-        },
-        {
-            "id": 66,
-            "name": "Peer-to-Peer (P2P)"
-        }
-    ]
-  }
+type IProductEditProps = IAppState & { [key:string]: any }
 
-  const TRLData = [
-    {
-        "id": "1",
-        "name": "TRL 1 – Basic principles observed (product idea available)",
-        "description": null
-    },
-    {
-        "id": "2",
-        "name": "TRL 2 – Technology concept formulated (business plan available)",
-        "description": null
-    },
-    {
-        "id": "3",
-        "name": "TRL 3 – Experimental proof of concept",
-        "description": null
-    },
-    {
-        "id": "4",
-        "name": "TRL 4 – Technology validated in lab",
-        "description": null
-    },
-    {
-        "id": "5",
-        "name": "TRL 5 – Technology validated in relevant environment (prototype available)",
-        "description": null
-    },
-    {
-        "id": "6",
-        "name": "TRL 6 – Technology demonstrated in relevant environment",
-        "description": null
-    },
-    {
-        "id": "7",
-        "name": "TRL 7 – System prototype demonstration in operational environment (pilot customer available)",
-        "description": null
-    },
-    {
-        "id": "8",
-        "name": "TRL 8 – System complete and qualified",
-        "description": null
-    },
-    {
-        "id": "9",
-        "name": "TRL 9 – Actual system proven in operational environment (established product available)",
-        "description": null
-    }
-]
-
+const ProductEditComponent = ({ product, trl: TRLData, config }: IProductEditProps) => {
+  const id = 6781;
   const dispatch = useDispatch();
-  const [productIn, setProductIn] = useState<IProduct>(product);
-  const [description, setDescription] = useState<string>(productIn?.description || '');
+  const navigate = useNavigate();
+  const [productIn, setProductIn] = useState<IProduct>();
+  const [description, setDescription] = useState<string>();
   const [newProductImage, setNewProductImage] = useState<any>('');
   const [editedFields, setEditedFields] = useState<EditableProductFields>({});
   const [toggleTRLModal, setToggleTRLModal] = useState(false);
+
+  // TODO: dedupe
+  useEffect(() => {
+    if (!product) {
+      axios
+      .get(`${API.getProduct}/${id}/`)
+      .then((result) => {
+        console.log('SUCCESS', result.data)
+        dispatch(getProductByIdSuccess(result.data));
+      })
+      .catch(e => console.log('UH OH', e));
+    } else {
+      const productCopy = { ...product };
+      setProductIn(productCopy);
+      setDescription(product.description)
+    }
+  }, [product]);
+
+  useEffect(() => {
+    if (!TRLData || TRLData?.length === 0) {
+      axios
+      .get(`${API.getTRL}/`)
+      .then((result) => {
+        console.log('SUCCESS', result.data)
+        dispatch(getTRLSuccess(result.data));
+      })
+      .catch(e => console.log('UH OH', e));
+    }
+  }, [TRLData]);
 
   const handleUploadProductImage = (e: React.SyntheticEvent<HTMLInputElement>, key: string) => {
     const target = e.target as HTMLInputElement;
@@ -249,33 +161,28 @@ const ProductEditComponent = ({
   }
 
   const onSave = () => {
-    
-  }
-
-  useEffect(() => {
     console.log('Edited: ', editedFields);
-  }, [editedFields]);
-
-  const doIt = () => {
-    axios.get(`${API.getProduct}/${6781}/`)
+    console.log('Call: ', `${API.putProduct}/${id}/`);
+    axios
+    .put(`${API.putProduct}/${id}/`, editedFields)
     .then((result) => {
       console.log('SUCCESS', result.data)
-      dispatch(getTRLSuccess(result.data));
-    }).catch(e => console.log('UH OH', e));
+      dispatch(putProductByIdSuccess(result.data));
+      navigate(`/product`);
+    })
+    .catch(e => console.log('UH OH', e));
   }
-  useEffect(() => {
-    // TODO:DOESN'T WORK (cors) 
-    // getProductByIdAction(6781);
 
-
-  }, []);
+  // useEffect(() => {
+  //   console.log('Edited: ', editedFields);
+  // }, [editedFields]);
 
   return (
     productIn && (
       <>
         <ModalComponent  isActive={toggleTRLModal} dismiss={() => setToggleTRLModal(false)} title="Select TRL" >
           <ul>
-            {TRLData.map(( trl ) => (
+            {TRLData?.map(( trl ) => (
               <li key={trl.id} className="h-14 border-b-2 hover:bg-[--secondary-color] hover:text-[--primary-color]">
                 <ButtonComponent className="px-4 font-bold" onClick={() => handleChangeTRL(trl)}>
                     {trl.name}
@@ -287,7 +194,7 @@ const ProductEditComponent = ({
         <div className="grid grid-rows-[min-content] md:grid-cols-[2fr_1fr]">
           <div className="md:border-r-4">
             {/* image */}
-            <div className="relative">
+            <div className="relative bg-[--secondary-color]">
               {newProductImage ? 
                 <img 
                   src={newProductImage} 
@@ -327,7 +234,8 @@ const ProductEditComponent = ({
             <ProductTitleComponent 
               productTitle={productIn.name}
               productType={productIn.type.name} 
-              config="Save" 
+              config="Save"
+              onSave={onSave}
             />
 
             {/* edit title */}
@@ -376,8 +284,8 @@ const ProductEditComponent = ({
 
             {/* details */}
             <div className="">
-              <h4 className="font-bold pb-4 p-4">Details</h4>
-              {getProductDetails(productIn).map((detail, i) => (
+              <h4 className="font-bold p-4 pb-0">Details</h4>
+              {TRLData && getProductDetails(productIn).map((detail, i) => (
                 <ProductDetailComponent
                   key={`${i}${detail.tags[0].name}`}
                   isEditable
@@ -394,7 +302,7 @@ const ProductEditComponent = ({
 
           {/* offered by */}
           <div>
-            <div className={`
+          <div className={!config?.hasUserSection ? 'hidden': `
             hidden
             md:block
             md:sticky
@@ -409,4 +317,12 @@ const ProductEditComponent = ({
   )
 }
 
-export default ProductEditComponent;
+const mapStateToProps = (state: { app: IAppState }) => {
+  const { app: { product, trl, config } } = state;
+  return {
+    product,
+    config,
+    trl,
+  }
+}
+export default connect(mapStateToProps, null)(ProductEditComponent);

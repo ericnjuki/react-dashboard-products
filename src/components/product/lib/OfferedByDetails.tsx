@@ -24,6 +24,7 @@ const OfferedByDetails = ({ user, company }: { user: IUser | undefined, company:
             {/* company logo */}
             <div className={`
             p-4
+            bg-[--secondary-color]
             `}>
               <img src="/innoloft_logo.png"/>
             </div>
@@ -41,7 +42,6 @@ const OfferedByDetails = ({ user, company }: { user: IUser | undefined, company:
               className={`
               bg-center
               bg-cover
-              bg-[url('/user_8d48197d.png')]
               `}></div>
               <div className="flex flex-col self-center pl-4">
                 <span className="font-bold text-sm">{user.firstName} {user.lastName}</span>

@@ -11,7 +11,6 @@ import {
 const INITIAL_STATE: IAppState = {
   allProducts: [],
   product: null,
-  putProduct: { value: {} },
   trl: null,
   config: null,
 };
@@ -33,10 +32,7 @@ const AppReducer = (state = INITIAL_STATE, action: { payload: any, type: string 
     case PUT_PRODUCT_BY_ID_SUCCESS:
       return {
         ...state,
-        putProduct: {
-          value: payload,
-          success: true,
-        }
+        product: payload,
       }
     case GET_TRL_SUCCESS:
       return {

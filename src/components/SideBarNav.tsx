@@ -22,7 +22,7 @@ const SideBarNavComponent = () => {
               </div>
             </IconContext.Provider>
             <span className="pl-4">
-              <Link to={"/products"}>Products</Link>
+              <Link to={"/product"}>Product</Link>
             </span>
         </li>
         <li className="flex p-4 border-b-4 h-14">

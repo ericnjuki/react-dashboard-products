@@ -3,12 +3,12 @@ import ButtonComponent from "./common/Button";
 import axios from "axios";
 import { API } from "../constants/api";
 import { getConfigSuccess } from "../redux-actions/AppActions";
-import { useNavigate } from "react-router-dom";
+const APP_ID = import.meta.env.VITE_APP_ID || 1;
+
 
 const OrganizationsComponent = () => {
   const organizations = [{ id: 1, name: 'Innoloft'}, { id: 2, name: 'NRW'}];
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const changeTheme = (id: number) => {
     if (id === -1) {
@@ -23,15 +23,20 @@ const OrganizationsComponent = () => {
       axios
       .get(`${API.getConfig}/${id}/`)
       .then((result) => {
-        console.log('Got org', result.data)
+        console.log('SUCCESS', result.data)
         dispatch(getConfigSuccess(result.data));
-        navigate('/');
+        // navigate('/');
       })
       .catch(e => console.log('UH OH', e));
     }
   }
   return (
     <ul className="h-[calc(100svh-7em)]">
+      <li key={-2} className="p-4 border-b-4 h-14 hover:bg-[--secondary-color] hover:text-[--primary-color]">
+        <ButtonComponent onClick={() => { changeTheme(APP_ID) }}>
+          Apply from Config {`{${APP_ID}}`}
+        </ButtonComponent>
+      </li>
       {organizations.map((org) => (
         <li key={org.id} className="p-4 border-b-4 h-14 hover:bg-[--secondary-color] hover:text-[--primary-color]">
           <ButtonComponent onClick={() => { changeTheme(org.id) }}>
@@ -39,11 +44,6 @@ const OrganizationsComponent = () => {
           </ButtonComponent>
         </li>
       ))}
-        <li key={-1} className="p-4 border-b-4 h-14 hover:bg-[--secondary-color] hover:text-[--primary-color]">
-          <ButtonComponent onClick={() => { changeTheme(-1) }}>
-            Default Org
-          </ButtonComponent>
-        </li>
     </ul>
   )
 }

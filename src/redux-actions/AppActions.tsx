@@ -7,7 +7,7 @@ import {
   GET_TRL_SUCCESS,
   PUT_PRODUCT_BY_ID_SUCCESS
 } from "../constants/actions";
-import axios, { AxiosHeaders } from 'axios';
+import axios from 'axios';
 import { API } from '../constants/api';
 
 const axiosError = (payload: any) => ({
@@ -42,7 +42,7 @@ const getProductsSuccess = (payload: any) => ({
 const getProducts = () => (
   (dispatch: Dispatch) => {
     try {
-      // requesting products one by one since we don't have a /products API
+      // requesting products one by one since we don't have a /allProducts API
       const promises: any[] = [];
       const productKeys = [6781]
       productKeys?.map((id) => promises.push(
@@ -119,9 +119,11 @@ const getConfig = (id: number) => (
 
 export {
   getProducts,
+  getProductsSuccess,
   getProductById,
   getProductByIdSuccess,
   putProductById,
+  putProductByIdSuccess,
   getTRL,
   getTRLSuccess,
   getConfig,

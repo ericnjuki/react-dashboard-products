@@ -12,7 +12,7 @@ return (
     className={className}
     height={height}
     referrerPolicy="no-referrer-when-downgrade"
-    // src={`https://www.google.com/maps/embed/v1/place?key=${MAPS_API_KEY}&center=${address.latitude},${address.longitude}&q=${address.country.name},${address.city.name},${address.street},${address.zipCode},${address.house}`}
+    src={`https://www.google.com/maps/embed/v1/place?key=${MAPS_API_KEY}&center=${address.latitude},${address.longitude}&q=${address.country.name},${address.city.name},${address.street},${address.zipCode},${address.house}`}
     allowFullScreen
   >
 </iframe>

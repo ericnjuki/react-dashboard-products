@@ -50,10 +50,10 @@ type IConfig = {
 type IAppState = {
   allProducts?: Array<IProduct>,
   product?: IProduct,
-  putProduct?: { [key:any]: any },
-  trl?: { id: number, name: string } | {} | null,
+  trl?: [{ id: string, name: string, description: string | null }] | [] | null,
   config?: IConfig,
-  error?: any
+  error?: any,
+  loading?: boolean,
 };
 
 type IdName = {

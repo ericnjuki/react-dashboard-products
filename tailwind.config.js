@@ -9,7 +9,7 @@ export default {
             borderTop: '4px solid rgba(255, 255, 255, 0.87)'
           },
           '100%': { 
-            zIndex: 10,
+            zIndex: 11,
             opacity: '1',
             transform: 'translateY(0)',
             borderTop: '0px'
