@@ -1,14 +1,27 @@
 import { IconContext } from "react-icons";
-import { BiGlobe, BiCaretDown, BiMenu } from "react-icons/bi";
+import { BiGlobe, BiMenu } from "react-icons/bi";
 import Logo from "./Logo";
 import SearchComponent from "./Search";
 import ButtonComponent from "./common/Button";
 import ModalComponent from "./common/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBarNavComponent from "./SideBarNav";
+import { connect } from "react-redux";
 
-const HeaderComponent = ({ }: any) => {
+const HeaderComponent = (props: any) => {
+  const config = props.config as IConfig;
+  const [style, setStyle] = useState<React.CSSProperties>({});
+
   const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {
+    if (config) {
+      const primaryColorStyle = { 
+        "--primary-color": config.mainColor,
+      } as React.CSSProperties;
+      setStyle(primaryColorStyle);
+    }
+  }, [config]);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -17,13 +30,15 @@ const HeaderComponent = ({ }: any) => {
   const dismissModal = () => { setShowMenu(false); }
   return (
     <>
-      <ModalComponent isActive={showMenu} dismiss={dismissModal}>
+      <ModalComponent title="" isActive={showMenu} dismiss={dismissModal}>
         {/* TODO: can do better, maybe menu component? */}
         <div onClick={dismissModal}>
           <SideBarNavComponent />
         </div>
       </ModalComponent>
-      <nav className={`
+      <nav 
+      style={style}
+      className={`
       h-14
       w-full
       max-w-[1280px]
@@ -38,8 +53,8 @@ const HeaderComponent = ({ }: any) => {
       z-10
       `}>
         <div className="hidden lg:grid">
-          <div className="border-r-4 flex items-center justify-center">
-              <Logo />
+          <div className="border-r-4 flex items-center justify-center bg-[--secondary-color]">
+              <Logo src={config?.logo} />
           </div>
         </div>
         <div className="grid grid-cols-[1fr_2fr] lg:grid-cols-1">
@@ -114,4 +129,8 @@ const HeaderComponent = ({ }: any) => {
   );
 }
 
-export default HeaderComponent;
+const mapStateToProps = ({ app }: { app: IAppState }) => {
+  const { config } = app;
+  return { config }
+}
+export default connect(mapStateToProps, null)(HeaderComponent);

@@ -1,5 +1,5 @@
 import { IconContext } from "react-icons";
-import { BiHome, BiShoppingBag } from "react-icons/bi";
+import { BiHome, BiNetworkChart, BiShoppingBag } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const SideBarNavComponent = () => {
@@ -23,6 +23,16 @@ const SideBarNavComponent = () => {
             </IconContext.Provider>
             <span className="pl-4">
               <Link to={"/products"}>Products</Link>
+            </span>
+        </li>
+        <li className="flex p-4 border-b-4 h-14">
+            <IconContext.Provider value={{ className: "w-6 h-6" }}>
+              <div>
+                <BiNetworkChart />
+              </div>
+            </IconContext.Provider>
+            <span className="pl-4">
+              <Link to={"/organizations"}>Organizations</Link>
             </span>
         </li>
       </ul>

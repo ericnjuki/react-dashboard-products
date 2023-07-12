@@ -40,12 +40,19 @@ type IProduct = {
   businessModels: Array<{ id: number, name: string }>
 } | null
 
+type IConfig = {
+  id: number,
+  logo: string,
+  mainColor: string,
+  hasUserSection: boolean
+} | null
+
 type IAppState = {
   allProducts?: Array<IProduct>,
   product?: IProduct,
   putProduct?: { [key:any]: any },
   trl?: { id: number, name: string } | {} | null,
-  config?: number | null,
+  config?: IConfig,
   error?: any
 };
 

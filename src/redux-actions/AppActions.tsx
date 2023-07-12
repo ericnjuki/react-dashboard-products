@@ -124,5 +124,6 @@ export {
   putProductById,
   getTRL,
   getTRLSuccess,
-  getConfig
+  getConfig,
+  getConfigSuccess,
 }

@@ -24,6 +24,7 @@ type EditableProductFields = {
   businessModels?: Array<{ id: number, name: string }>,
   trl?: { id: number, name: string },
   investmentEffort?: string,
+  description: string,
 } | {};
 
 const ProductEditComponent = ({
@@ -220,10 +221,26 @@ const ProductEditComponent = ({
     }
   }
 
-  const handlechangeDescription = (value: string) => {
-    // TODO: if new value is not equal to value from state
-      setDescription(value);
-      // add to edited fields
+  const handleChangeTextFields = (field: { name: string, value: string }) => {
+    const editedFieldsCopy = { ...editedFields };
+    switch(field.name) {
+      case 'description':
+        if (field.value !== description) {
+          editedFieldsCopy.description = field.value;
+          setEditedFields(editedFieldsCopy);
+        }
+        break;
+      case 'name':
+        editedFieldsCopy.name = field.value;
+        setEditedFields(editedFieldsCopy);
+        break;
+      case 'video':
+        editedFieldsCopy.video = field.value;
+        setEditedFields(editedFieldsCopy);
+        break;
+      default:
+        break;
+    }
   }
 
   const handleChangeTRL = (trl: { id: string, name: string, description: string | null }) => {
@@ -259,7 +276,7 @@ const ProductEditComponent = ({
         <ModalComponent  isActive={toggleTRLModal} dismiss={() => setToggleTRLModal(false)} title="Select TRL" >
           <ul>
             {TRLData.map(( trl ) => (
-              <li className="h-14 border-b-2 hover:bg-[--secondary-color] hover:text-[--primary-color]">
+              <li key={trl.id} className="h-14 border-b-2 hover:bg-[--secondary-color] hover:text-[--primary-color]">
                 <ButtonComponent className="px-4 font-bold" onClick={() => handleChangeTRL(trl)}>
                     {trl.name}
                 </ButtonComponent>
@@ -307,13 +324,39 @@ const ProductEditComponent = ({
             </div>
 
             {/* product title */}
-            <ProductTitleComponent productTitle={productIn.name} productType={productIn.type.name} isEditable={false} />
+            <ProductTitleComponent 
+              productTitle={productIn.name}
+              productType={productIn.type.name} 
+              config="Save" 
+            />
 
             {/* edit title */}
-            <ProductInputFieldComponent label="Name:" className="mt-4" value={productIn.name} onChange={() => {}} />
+            {/* TODO: rm magic strings */}
+            {/* TODO: dont change editedFields on input changes
+            save in local state and update editedFields on SAVE */}
+            <ProductInputFieldComponent 
+              label="Name:"
+              className="mt-4" 
+              value={productIn.name} 
+              onChange={(val) => { 
+                handleChangeTextFields({
+                  name: 'name',
+                  value: val
+                }) 
+              }} 
+            />
 
             {/* video url */}
-            <ProductInputFieldComponent label="Video URL:" value={productIn.video} onChange={() => {}} />
+            <ProductInputFieldComponent 
+              label="Video URL:" 
+              value={productIn.video} 
+              onChange={(val) => { 
+                handleChangeTextFields({
+                  name: 'video',
+                  value: val
+                }) 
+              }} 
+            />
 
             {/* description */}
             <div className={`
@@ -322,13 +365,18 @@ const ProductEditComponent = ({
               {/* TODO: draftEditor, change value to defaultValue */}
               <DraftEditor 
                 value={productIn.description}
-                onChange={(val) => handlechangeDescription(val)}
+                onChange={(val) => { 
+                  handleChangeTextFields({ 
+                    name: 'description', 
+                    value: val 
+                  }) 
+                }}
               />
             </div>
 
             {/* details */}
             <div className="">
-              <h4 className="font-bold pb-4">Details</h4>
+              <h4 className="font-bold pb-4 p-4">Details</h4>
               {getProductDetails(productIn).map((detail, i) => (
                 <ProductDetailComponent
                   key={`${i}${detail.tags[0].name}`}

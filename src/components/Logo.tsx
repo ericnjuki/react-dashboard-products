@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const LogoComponent = () => {
+const LogoComponent = ({ src }: { src?: string }) => {
   return (
-    <Link to={'/'}>
-      <img src="/vite.svg" />
+    <Link to={'/'} className="h-full w-auto">
+      <img src={src || "/vite.svg"} className="h-full w-auto" />
     </Link>
   );
 }

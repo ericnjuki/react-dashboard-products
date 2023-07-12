@@ -3,5 +3,5 @@ export const API = {
   getProduct: `${baseUrl}/product`,
   putProduct: `${baseUrl}/product`,
   getTRL: `${baseUrl}/trl`,
-  getConfig: `${baseUrl}/configuratation`
+  getConfig: `${baseUrl}/configuration`
 }

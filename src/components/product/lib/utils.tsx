@@ -26,3 +26,9 @@ export const getProductDetails = (product: IProduct) : Array<ProductDetailType> 
 export const getKeyByValue = (object: { [key: string]: any }, value: any) => {
   return Object.keys(object).find((key: string) => object[key] === value);
 }
+
+export function nameof<T>(obj: T, expression: (x: { [Property in keyof T]: () => string }) => () => string): string {
+    const res: { [Property in keyof T]: () => string } = {} as { [Property in keyof T]: () => string };
+    Object.keys(obj as Object).map(k => res[k as keyof T] = () => k);
+    return expression(res)();
+}

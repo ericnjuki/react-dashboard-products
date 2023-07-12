@@ -11,6 +11,10 @@ const ProductInputFieldComponent = (
     onChange: (arg?:any) => any
   }
   ) => {
+  const handleTextFieldChange = (e: React.SyntheticEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    onChange(target.value);
+  };
   return (
     <div className={`
     flex
@@ -21,9 +25,9 @@ const ProductInputFieldComponent = (
       <div className="h-full w-full p-3">
         <input 
           type="text"
-          className="p-1 h-full w-full focus-visible:outline-none" 
-          value={value}
-          onChange={onChange} 
+          className="p-1 h-full w-full focus-visible:outline-none bg-[--input-color]" 
+          defaultValue={value}
+          onChange={handleTextFieldChange} 
         />
       </div>
     </div>

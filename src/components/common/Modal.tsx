@@ -1,10 +1,32 @@
 import { IconContext } from "react-icons";
 import { BiX } from "react-icons/bi";
 import ButtonComponent from "./Button";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-const ModalComponent = ({ children, title = '', isActive = false, dismiss }: { title: string, isActive: boolean, dismiss: (args?:any) => any, [key:string]: any }) => {
+type ModalProps = { 
+  title: string,
+  isActive: boolean,
+  dismiss: (args?:any) => any, [key:string]: any 
+}
+const ModalComponent = (props: ModalProps) => {
+  const { children, title = '', isActive = false, dismiss } = props;
+  const config = props.config as IConfig;
+  const [style, setStyle] = useState<React.CSSProperties>({});
+
+  useEffect(() => {
+    if (config) {
+      const primaryColorStyle = { 
+        "--primary-color": config.mainColor,
+      } as React.CSSProperties;
+      setStyle(primaryColorStyle);
+    }
+  }, [config]);
+
   return (
-    <div className={`
+    <div 
+    style={style}
+    className={`
     h-full
     w-full
     max-w-[1280px]
@@ -44,4 +66,8 @@ const ModalComponent = ({ children, title = '', isActive = false, dismiss }: { t
     </div>
   );
 }
-export default ModalComponent;
+const mapStateToProps = ({ app }: { app: IAppState }) => {
+  const { config } = app;
+  return { config }
+}
+export default connect(mapStateToProps, null)(ModalComponent);

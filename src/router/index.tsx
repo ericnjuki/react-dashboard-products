@@ -6,6 +6,7 @@ import ProductViewComponent from "../components/product/view";
 import HomeComponent from "../components/Home";
 import ProductListComponent from "../components/product/list";
 import ProductEditComponent from "../components/product/edit";
+import OrganizationsComponent from "../components/Organizations";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         element: <HomeComponent />
       },
       {
+        path: "/organizations",
+        element: <OrganizationsComponent />
+      },
+      {
         path: "/products",
         element: <ProductListComponent />
       },
@@ -28,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         // path: "/products/:productId",
-        path: "product/1/edit",
+        path: "product/:id/edit",
         element: <ProductEditComponent />,
       }
     ],

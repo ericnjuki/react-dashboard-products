@@ -107,15 +107,13 @@ const ProductViewComponent = ({
   }
 
   return(
-    <>
-    {/* <ModalComponent /> */}
     <div className="grid grid-rows-[min-content] md:grid-cols-[2fr_1fr]">
       <div className="md:border-r-4">
         {/* image */}
         <ProductImageComponent imageUrl={product.picture} />
 
         {/* product title */}
-        <ProductTitleComponent productTitle={product?.name} productType={product?.type.name} isEditable />
+        <ProductTitleComponent productTitle={product?.name} productType={product?.type.name} config="Edit" />
 
         {/* description */}
         <div className={`
@@ -143,11 +141,12 @@ const ProductViewComponent = ({
         {/* details */}
         <div className={`
         border-b-4
-        p-4
+        
         `}>
-          <h4 className="font-bold pb-4">Details</h4>
+          <h4 className="font-bold pb-4 p-4">Details</h4>
           {getProductDetails(product).map((detail) => (
               <ProductDetailComponent 
+                key={detail.title}
                 title={detail.title}
                 icon={detail.icon} 
                 tags={detail.tags} 
@@ -198,7 +197,6 @@ const ProductViewComponent = ({
         </div>
       </div>
     </div>
-    </>
   )
 }
 

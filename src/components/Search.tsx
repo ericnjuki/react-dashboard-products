@@ -19,7 +19,7 @@ const SearchComponent = () => {
         </IconContext.Provider>
       </div>
       <div className="h-full w-full text-2xl">
-        <input type="text" className="h-full w-full focus-visible:outline-none [line-height:100%]" />
+        <input type="text" className="h-full w-full focus-visible:outline-none [line-height:100%] bg-[--input-color]" />
       </div>
       <div className="hidden md:block h-full w-full">
         <ButtonComponent className="grid-cols-[5fr,1fr]">
