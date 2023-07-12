@@ -12,7 +12,7 @@ A simple dashboard that fetches a product, displays it, and allows you to edit i
 
 [Link](https://react-dashboard-products.vercel.app/)
 
-**What’s up with the weird design dude?**
+**What’s up with the weird design?**
 
 - Inspired by this [good-looking bold design](https://designyourlife.com.au/)!
 
