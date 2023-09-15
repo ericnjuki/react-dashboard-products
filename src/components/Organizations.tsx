@@ -26,7 +26,7 @@ const OrganizationsComponent = () => {
       axios
         .get(`${API.getConfig}/${id}/`)
         .then((result) => {
-          console.log('SUCCESS', result.data);
+          // console.log('SUCCESS', result.data);
           dispatch(getConfigSuccess(result.data));
           // navigate('/');
         })

@@ -101,7 +101,6 @@ const ProductDetailComponent = ({
         <span className='pl-4'>{title}</span>
       </div>
       <ul className='pt-4 flex flex-wrap'>
-        {/* TODO: proper customizability with isEditable? */}
         {tags &&
           tags.map((item: IdName, i: number) => {
             return (

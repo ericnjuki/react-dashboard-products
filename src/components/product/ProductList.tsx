@@ -21,7 +21,7 @@ const ProductListComponent = ({
       axios
         .get(`${API.getProduct}/${6781}/`)
         .then((result) => {
-          console.log('SUCCESS', result.data);
+          // console.log('SUCCESS', result.data);
           dispatch(getProductsSuccess([result.data]));
         })
         .catch((e) => console.log('UH OH', e));
@@ -53,7 +53,6 @@ const ProductListComponent = ({
             <Link to={`/product`}>{prod?.name}</Link>
           </span>
           {/* <p className="mb-4">{prod?.description}</p> */}
-          {/* TODO: link. check all links href */}
           <Link
             className='mt-4'
             to={`/product`}

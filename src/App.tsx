@@ -23,7 +23,7 @@ const App = (props: { [key: string]: unknown }) => {
       axios
         .get(`${API.getConfig}/${APP_ID}/`)
         .then((result) => {
-          console.log('SUCCESS', result.data);
+          // console.log('SUCCESS', result.data);
           dispatch(getConfigSuccess(result.data));
         })
         .catch((e) => console.log('UH OH', e));

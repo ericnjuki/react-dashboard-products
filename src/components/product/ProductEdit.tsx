@@ -56,7 +56,7 @@ const ProductEditComponent = ({
       axios
         .get(`${API.getProduct}/${id}/`)
         .then((result) => {
-          console.log('SUCCESS', result.data);
+          // console.log('SUCCESS', result.data);
           dispatch(getProductByIdSuccess(result.data));
         })
         .catch((e) => console.log('UH OH', e));
@@ -72,7 +72,7 @@ const ProductEditComponent = ({
       axios
         .get(`${API.getTRL}/`)
         .then((result) => {
-          console.log('SUCCESS', result.data);
+          // console.log('SUCCESS', result.data);
           dispatch(getTRLSuccess(result.data));
         })
         .catch((e) => console.log('UH OH', e));
@@ -205,7 +205,7 @@ const ProductEditComponent = ({
     axios
       .put(`${API.putProduct}/${id}/`, editedFields)
       .then((result) => {
-        console.log('SUCCESS', result.data);
+        // console.log('SUCCESS', result.data);
         dispatch(putProductByIdSuccess(result.data));
         navigate(`/product`);
       })
@@ -328,7 +328,6 @@ const ProductEditComponent = ({
             `}
             >
               <p className='pl-4 py-4 min-w-[8em]'>Description:</p>
-              {/* TODO: draftEditor, change value to defaultValue */}
               <DraftEditor
                 value={productIn.description}
                 onChange={(val) => {
